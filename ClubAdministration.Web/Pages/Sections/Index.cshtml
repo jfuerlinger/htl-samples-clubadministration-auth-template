@@ -1,0 +1,70 @@
+﻿@page
+@model IndexModel
+@{
+}
+
+<h2>My sections</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Sections[0].Name)
+            </th>
+            <th class="text-center col-md-1">
+                @Html.DisplayNameFor(model => model.Sections[0].CountOfMembers)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Sections)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-center col-md-1">
+                    @Html.DisplayFor(modelItem => item.CountOfMembers)
+                </td>
+                <td><a asp-page="./Leave" asp-route-sectionId="@item.Id">Leave</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<h2>Sections to join</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SectionsNotMemberOf[0].Name)
+            </th>
+            <th class="text-center col-md-1">
+                @Html.DisplayNameFor(model => model.SectionsNotMemberOf[0].CountOfMembers)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SectionsNotMemberOf)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-center col-md-1">
+                    @Html.DisplayFor(modelItem => item.CountOfMembers)
+                </td>
+                <td><a asp-page="./Join" asp-route-sectionid="@item.Id">Join</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

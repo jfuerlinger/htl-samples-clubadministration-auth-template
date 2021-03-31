@@ -1,0 +1,32 @@
+﻿@page "{sectionId:int}"
+@model LeaveModel
+@{
+}
+
+<h1>Leave Section</h1>
+
+<h3>Do you really want to leave this Section?</h3>
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Section.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Section.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Section.CountOfMembers)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Section.CountOfMembers)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="MemberSectionId" />
+        <input type="submit" value="Leave" class="btn btn-danger" /> |
+        <a asp-Page="./Index">Back to List</a>
+    </form>
+</div>

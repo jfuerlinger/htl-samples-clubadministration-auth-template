@@ -1,0 +1,67 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h2>Members of section</h2>
+<hr />
+<div class="row">
+    <div class="col-md-2">
+        <form name="formIndex"  method="post" onchange="DoPostBack();">
+            <div class="form-group">
+                <label asp-for="SelectedSectionId" class="control-label"></label>
+                <select asp-for="SelectedSectionId" class="form-control" asp-items="@Model.Sections"></select>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Members[0].Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Members[0].Firstname)
+            </th>
+            <th class="text-center col-md-1">
+                @Html.DisplayNameFor(model => model.Members[0].IsAdmin)
+            </th>
+            <th class="text-center col-md-1">
+                @Html.DisplayNameFor(model => model.Members[0].RegisteredSince)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Members) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td class="text-center col-md-1">
+                @Html.DisplayFor(modelItem => item.IsAdmin)
+            </td>
+            <td class="text-center col-md-1">
+                @Html.DisplayFor(modelItem => item.RegisteredSince)
+            </td>
+            <td><a asp-page="/Members/Edit" asp-route-id="@item.Id">Edit Member</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<script>
+    function DoPostBack() {
+        document.formIndex.submit();
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
